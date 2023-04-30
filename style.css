@@ -69,6 +69,7 @@ body {
         background-color: #CCCCCC;
         box-shadow: none;
         text-shadow: none;
+        border: 1px solid gray;
     }
     
     .key_modify {
