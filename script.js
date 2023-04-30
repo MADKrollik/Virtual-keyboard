@@ -1,17 +1,17 @@
 const keys = [
-    { value: "`", code: "Backquote", keyCode: 192, type: "character" },
-    { value: "1", code: "Digit1", keyCode: 49, type: "character" },
-    { value: "2", code: "Digit2", keyCode: 50, type: "character" },
-    { value: "3", code: "Digit3", keyCode: 51, type: "character" },
-    { value: "4", code: "Digit4", keyCode: 52, type: "character" },
-    { value: "5", code: "Digit5", keyCode: 53, type: "character" },
-    { value: "6", code: "Digit6", keyCode: 54, type: "character" },
-    { value: "7", code: "Digit7", keyCode: 55, type: "character" },
-    { value: "8", code: "Digit8", keyCode: 56, type: "character" },
-    { value: "9", code: "Digit9", keyCode: 57, type: "character" },
-    { value: "0", code: "Digit0", keyCode: 48, type: "character" },
-    { value: "-", code: "Minus", keyCode: 189, type: "character" },
-    { value: "=", code: "Equal", keyCode: 187, type: "character" },
+    { value: "`", code: "Backquote", keyCode: 192, type: "character"},
+    { value: "1", code: "Digit1", keyCode: 49, type: "character"},
+    { value: "2", code: "Digit2", keyCode: 50, type: "character"},
+    { value: "3", code: "Digit3", keyCode: 51, type: "character"},
+    { value: "4", code: "Digit4", keyCode: 52, type: "character"},
+    { value: "5", code: "Digit5", keyCode: 53, type: "character"},
+    { value: "6", code: "Digit6", keyCode: 54, type: "character"},
+    { value: "7", code: "Digit7", keyCode: 55, type: "character"},
+    { value: "8", code: "Digit8", keyCode: 56, type: "character"},
+    { value: "9", code: "Digit9", keyCode: 57, type: "character"},
+    { value: "0", code: "Digit0", keyCode: 48, type: "character"},
+    { value: "-", code: "Minus", keyCode: 189, type: "character"},
+    { value: "=", code: "Equal", keyCode: 187, type: "character"},
     { value: "Backspace", code: "Backspace", keyCode: 8, type: "modifier" },
     { value: "Tab", code: "Tab", keyCode: 9, type: "modifier" },
     { value: "q", code: "KeyQ", keyCode: 81, type: "character" },
@@ -24,9 +24,9 @@ const keys = [
     { value: "i", code: "KeyI", keyCode: 73, type: "character" },
     { value: "o", code: "KeyO", keyCode: 79, type: "character" },
     { value: "p", code: "KeyP", keyCode: 80, type: "character" },
-    { value: "[", code: "BracketLeft", keyCode: 219, type: "character" },
-    { value: "]", code: "BracketRight", keyCode: 221, type: "character" },
-    { value: "\\", code: "Backslash", keyCode: 220, type: "character" },
+    { value: "[", code: "BracketLeft", keyCode: 219, type: "character", shiftValue: '{' },
+    { value: "]", code: "BracketRight", keyCode: 221, type: "character", shiftValue: '}' },
+    { value: "\\", code: "Backslash", keyCode: 220, type: "character", shiftValue: '|' },
     { value: 'Del', code: "Delete", keyCode: 46, type: "modifier" },
     { value: "Caps Lock", code: "CapsLock", keyCode: 20, type: "modifier" },
     { value: "a", code: "KeyA", keyCode: 65, type: "character" },
@@ -38,8 +38,8 @@ const keys = [
     { value: "j", code: "KeyJ", keyCode: 74, type: "character" },
     { value: "k", code: "KeyK", keyCode: 75, type: "character" },
     { value: "l", code: "KeyL", keyCode: 76, type: "character" },
-    { value: ";", code: "Semicolon", keyCode: 186, type: "character" },
-    { value: "'", code: "Quote", keyCode: 222, type: "character" },
+    { value: ";", code: "Semicolon", keyCode: 186, type: "character", shiftValue: ':' },
+    { value: "'", code: "Quote", keyCode: 222, type: "character", shiftValue: '"' },
     { value: "Enter", code: "Enter", keyCode: 13, type: "control" },
     { value: "Shift", code: "ShiftLeft", keyCode: 16, type: "modifier" },
     { value: "z", code: "KeyZ", keyCode: 90, type: "character" },
@@ -49,9 +49,9 @@ const keys = [
     { value: "b", code: "KeyB", keyCode: 66, type: "character" },
     { value: "n", code: "KeyN", keyCode: 78, type: "character" },
     { value: "m", code: "KeyM", keyCode: 77, type: "character" },
-    { value: ",", code: "Comma", keyCode: 188, type: "character" },
-    { value: ".", code: "Period", keyCode: 190, type: "character" },
-    { value: "/", code: "Slash", keyCode: 191, type: "character" },
+    { value: ",", code: "Comma", keyCode: 188, type: "character", shiftValue: '<' },
+    { value: ".", code: "Period", keyCode: 190, type: "character", shiftValue: '>' },
+    { value: "/", code: "Slash", keyCode: 191, type: "character", shiftValue: '?' },
     { value: "↑", code: "ArrowUp", keyCode: 38, type: "navigation" },
     { value: "Shift", code: "ShiftRight", keyCode: 16, type: "modifier" },
     { value: "Ctrl", code: "ControlLeft", keyCode: 17, type: "modifier" },
@@ -115,6 +115,30 @@ const releaseKey = (e) => {
     }
 };
 
+const shiftValues = {
+    '`': '~',
+    '1': '!',
+    '2': '@',
+    '3': '#',
+    '4': '$',
+    '5': '%',
+    '6': '^',
+    '7': '&',
+    '8': '*',
+    '9': '(',
+    '0': ')',
+    '-': '_',
+    '=': '+',
+    '[': '{',
+    ']': '}',
+    '\\': '|',
+    ';': ':',
+    "'": '"',
+    ',': '<',
+    '.': '>',
+    '/': '?'
+};
+
 const createKeys = () => {
     const keyboard = document.querySelector('.keyboard');
     keyboard.innerHTML = '';
@@ -122,7 +146,10 @@ const createKeys = () => {
     keys.forEach((key) => {
         const newKey = document.createElement('div');
 
-        newKey.setAttribute('value', `${(!shiftPressed || ['Tab', 'CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'Meta', 'AltLeft', 'AltRight', 'Backspace', 'Enter', 'Delete'].includes(key.code))  ? key.value.toLowerCase() : key.value.toUpperCase()}`);
+        newKey.setAttribute('value', `${(!shiftPressed || ['Tab', 'CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'Meta', 'AltLeft', 'AltRight', 'Backspace', 'Enter', 'Delete'].includes(key.code))  
+        ? key.value.toLowerCase() 
+        : shiftValues[key.value] || key.value.toUpperCase()}`);
+
         newKey.setAttribute('type', `${key.type}`);
         newKey.setAttribute('code', `${key.code}`);
         newKey.textContent = newKey.getAttribute('value');
