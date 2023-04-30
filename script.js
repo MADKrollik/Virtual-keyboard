@@ -64,3 +64,90 @@ const keys = [
     { value: "→", code: "ArrowRight", keyCode: 39, type: "navigation" },
     { value: "Ctrl", code: "ControlRight", keyCode: 17, type: "modifier" }
 ];
+
+
+const createTitle = () => {
+    const title = document.createElement('h1');
+    title.className = 'h1';
+    title.textContent = 'Virtual keyboard';
+    document.body.append(title);
+}
+
+const createTextarea = () => {
+    const textArea = document.createElement('textarea');
+    textArea.className = 'textarea';
+    textArea.cols = '75';
+    textArea.rows = '5';
+    document.body.append(textArea);
+    textArea.focus();
+};
+
+
+
+const createKeyboard = () => {
+    const keyboard = document.createElement('div');
+    document.body.append(keyboard);
+    keyboard.className = 'keyboard';
+};
+
+
+let shiftPressed = false;
+
+const pressKey = (e) => {
+    const key = document.querySelector(`[code="${e.code}"]`);
+    if (key) {
+        key.classList.add('key_active');
+        if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+            shiftPressed = true;
+            createKeys();
+        }
+    }
+};
+
+const releaseKey = (e) => {
+    const key = document.querySelector(`[code="${e.code}"]`);
+    if (key) {
+        key.classList.remove('key_active');
+        if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+            shiftPressed = false;
+            createKeys();
+        }
+    }
+};
+
+const createKeys = () => {
+    const keyboard = document.querySelector('.keyboard');
+    keyboard.innerHTML = '';
+
+    keys.forEach((key) => {
+        const newKey = document.createElement('div');
+
+        newKey.setAttribute('value', `${(!shiftPressed || ['Tab', 'CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'Meta', 'AltLeft', 'AltRight', 'Backspace', 'Enter', 'Delete'].includes(key.code))  ? key.value.toLowerCase() : key.value.toUpperCase()}`);
+        newKey.setAttribute('type', `${key.type}`);
+        newKey.setAttribute('code', `${key.code}`);
+        newKey.textContent = newKey.getAttribute('value');
+
+        newKey.className = 'key';
+
+        if (['Backspace', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRight'].includes(key.code)) {
+            newKey.classList.add('key_modify');
+        }
+
+        if (key.code === 'Space') {
+            newKey.classList.add('key_space');
+        }
+
+        keyboard.append(newKey);
+    });
+};
+
+createTitle();
+createTextarea();
+createKeyboard();
+createKeys();
+
+const textArea = document.querySelector('.textarea');
+textArea.focus();
+
+window.addEventListener('keydown', pressKey);
+window.addEventListener('keyup', releaseKey);
