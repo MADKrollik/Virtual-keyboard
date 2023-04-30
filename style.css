@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    }
+
+body {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    }
+    
+    h1 {
+    text-align: center;
+    color: black;
+    padding-bottom: 30px;
+    }
+    
+    .textarea {
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+    resize: none;
+    }
+    
+    .textarea:focus-visible {
+    outline: none;
+    }
+    
+    .keyboard {
+    max-width: 780px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    }
+    
+    .key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+    background: white;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    transition: .2s;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .key:hover {
+        background-color: #EEEEEE;
+    }
+    
+    .key_active {
+        background-color: #CCCCCC;
+        box-shadow: none;
+        text-shadow: none;
+    }
+    
+    .key_modify {
+    width: 100px;
+    
+    }
+    
+    .key_space {
+    width: 350px;
+    }
+    
+    
+    
+    
+    
+    
