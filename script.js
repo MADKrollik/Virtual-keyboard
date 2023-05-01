@@ -151,10 +151,16 @@ const pressKey = (e) => {
             shiftPressed = true;
             createKeys();
         }
+
+        if (e.code === 'CapsLock') {
+            capsLockPressed = !capsLockPressed;
+            createKeys();
+        }
     }
 
     if (e.altKey && e.shiftKey) {
         isRu = !isRu;
+        localStorage.setItem('isRu', isRu);
         e.preventDefault();
     }
 };
@@ -174,10 +180,14 @@ const createKeys = () => {
     const keyboard = document.querySelector('.keyboard');
     keyboard.innerHTML = '';
 
+    if (localStorage.getItem('isRu') !== null) {
+        isRu = JSON.parse(localStorage.getItem('isRu'));
+    }
+
     keys.forEach((key) => {
         const newKey = document.createElement('div');
 
-        newKey.setAttribute('value', `${(!shiftPressed || ['Tab', 'CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'Meta', 'AltLeft', 'AltRight', 'Backspace', 'Enter', 'Delete'].includes(key.code))
+        newKey.setAttribute('value', `${(!shiftPressed && !capsLockPressed || ['Tab', 'CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'Meta', 'AltLeft', 'AltRight', 'Backspace', 'Enter', 'Delete'].includes(key.code))
             ? key.value
             : shiftValuesEn[key.value] || key.value.toUpperCase()}`);
 
@@ -185,7 +195,7 @@ const createKeys = () => {
         newKey.setAttribute('code', `${key.code}`);
         newKey.setAttribute('ruValue', `${key.ruValue}`);
 
-        newKey.textContent = isRu ? (!shiftPressed || ['Tab', 'CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'Meta', 'AltLeft', 'AltRight', 'Backspace', 'Enter', 'Delete'].includes(key.code)
+        newKey.textContent = isRu ? (!shiftPressed && !capsLockPressed || ['Tab', 'CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'Meta', 'AltLeft', 'AltRight', 'Backspace', 'Enter', 'Delete'].includes(key.code)
             ? newKey.getAttribute('ruValue')
             : shiftValuesRu[newKey.getAttribute('ruValue')] || newKey.getAttribute('ruValue').toLocaleUpperCase())
             : newKey.getAttribute('value');
