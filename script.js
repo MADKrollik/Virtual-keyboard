@@ -131,8 +131,17 @@ const createKeyboard = () => {
     keyboard.className = 'keyboard';
 };
 
+const footer = () => {
+    const footer = document.createElement('div');
+    document.body.append(footer);
+
+    const description = document.createElement('p');
+    description.textContent = 'To switch the language press Alt + Shift';
+    footer.append(description);
+};
 
 let shiftPressed = false;
+let capsLockPressed = false;
 
 const pressKey = (e) => {
     const key = document.querySelector(`[code="${e.code}"]`);
@@ -207,6 +216,16 @@ const createKeys = () => {
             newKey.addEventListener('click', () => {
                 textArea.textContent = `${textArea.textContent}\n`;
             });
+        } else if (newKey.getAttribute('code') === 'ShiftLeft' || newKey.getAttribute('code') === 'ShiftRight' || newKey.getAttribute('code') === 'CapsLock') {
+            newKey.addEventListener('mousedown', () => {
+                if (newKey.getAttribute('code') === 'CapsLock') {
+                    capsLockPressed = !capsLockPressed;
+                } else {
+                    shiftPressed = !shiftPressed;
+                }
+                createKeys();
+            });
+
         }
 
         newKey.addEventListener('mousedown', () => {
@@ -226,9 +245,11 @@ createTitle();
 createTextarea();
 createKeyboard();
 createKeys();
+footer();
 
 const textArea = document.querySelector('.textarea');
 textArea.focus();
 
 window.addEventListener('keydown', pressKey);
 window.addEventListener('keyup', releaseKey);
+
