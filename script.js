@@ -52,16 +52,16 @@ const keys = [
     { value: ",", ruValue: 'б', code: "Comma", keyCode: 188, type: "character", shiftValue: '<' },
     { value: ".", ruValue: 'ю', code: "Period", keyCode: 190, type: "character", shiftValue: '>' },
     { value: "/", ruValue: '.', code: "Slash", keyCode: 191, type: "character", shiftValue: '?' },
-    { value: "↑", ruValue: '↑', code: "ArrowUp", keyCode: 38, type: "navigation" },
+    { value: "↑", ruValue: '↑', code: "ArrowUp", keyCode: 38, type: "character" },
     { value: "Shift", ruValue: 'Shift', code: "ShiftRight", keyCode: 16, type: "modifier" },
     { value: "Ctrl", ruValue: 'Ctrl', code: "ControlLeft", keyCode: 17, type: "modifier" },
     { value: "Win", ruValue: 'Win', code: "Meta", keyCode: 91, type: "meta" },
     { value: "Alt", ruValue: 'Alt', code: "AltLeft", keyCode: 18, type: "modifier" },
     { value: " ", ruValue: " ", code: "Space", keyCode: 32, type: "character" },
     { value: "Alt", ruValue: 'Alt', code: "AltRight", keyCode: 18, type: "modifier" },
-    { value: "←", ruValue: '←', code: "ArrowLeft", keyCode: 37, type: "navigation" },
-    { value: "↓", ruValue: '↓', code: "ArrowDown", keyCode: 40, type: "navigation" },
-    { value: "→", ruValue: '→', code: "ArrowRight", keyCode: 39, type: "navigation" },
+    { value: "←", ruValue: '←', code: "ArrowLeft", keyCode: 37, type: "character" },
+    { value: "↓", ruValue: '↓', code: "ArrowDown", keyCode: 40, type: "character" },
+    { value: "→", ruValue: '→', code: "ArrowRight", keyCode: 39, type: "character" },
     { value: "Ctrl", ruValue: 'Ctrl', code: "ControlRight", keyCode: 17, type: "modifier" }
 ];
 
@@ -235,7 +235,11 @@ const createKeys = () => {
                 }
                 createKeys();
             });
-
+        } else if (newKey.getAttribute('code') === 'Delete') {
+            newKey.addEventListener('click', () => {
+                const cursorPosition = textArea.selectionStart;
+                textArea.textContent = textArea.textContent.substring(0, cursorPosition) + textArea.textContent.substring(cursorPosition + 1);
+            });
         }
 
         newKey.addEventListener('mousedown', () => {
